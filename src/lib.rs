@@ -73,10 +73,8 @@ pub struct Str(*const u8);
 unsafe impl Send for Str {}
 unsafe impl Sync for Str {}
 
-impl Deref for Str {
-    type Target = str;
-
-    fn deref(&self) -> &Self::Target {
+impl Str {
+    fn get(&self) -> &'static str {
         unsafe {
             let len = *self.0 as usize;
             let ptr = self.0.wrapping_add(1);
@@ -86,15 +84,23 @@ impl Deref for Str {
     }
 }
 
+impl Deref for Str {
+    type Target = str;
+
+    fn deref(&self) -> &'static Self::Target {
+	self.get()
+    }
+}
+
 impl Borrow<str> for Str {
-    fn borrow(&self) -> &str {
-        self.deref()
+    fn borrow(&self) -> &'static str {
+	self.get()
     }
 }
 
 impl AsRef<str> for Str {
-    fn as_ref(&self) -> &str {
-        self.deref()
+    fn as_ref(&self) -> &'static str {
+	self.get()
     }
 }
 
