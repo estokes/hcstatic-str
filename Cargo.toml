@@ -1,0 +1,21 @@
+[package]
+name = "hcstatic-str"
+version = "0.1.0"
+edition = "2021"
+authors = ["Eric Stokes"]
+license = "MIT"
+description = "compact storage for short static strings"
+documentation = "https://docs.rs/hcstatic-str"
+readme = "README.md"
+keywords = ["static", "str", "string", "hashcons"]
+category = ["data-structures"]
+
+[dependencies]
+once_cell = "1"
+parking_lot = "0.12"
+fxhash = "0.2"
+anyhow = "1"
+
+[dev-dependencies]
+rand = "0.8"
+
